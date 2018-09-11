@@ -4,7 +4,7 @@ class Node():
         self.next = next_node
 
 def Reverse(head):
-    if nor head:
+    if not head:
         return None
     pre_node = None
     next_node = None
