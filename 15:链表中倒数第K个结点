@@ -1,0 +1,30 @@
+class Node():
+    def __init__(self, value, next_node = None):
+        self.value = value
+        self.next = next_node
+    
+def FindKthToTail(head, k):
+    if head is None or k <= 0:
+        return None
+    first = head
+    for i in range(k-1):
+        if first.next:
+            first = first.next
+        else:
+            return None
+    second = head
+    while first.next:
+        first = first.next
+        second = second.next
+    print(second.value)
+
+
+
+n6 = Node(6)
+n5 = Node(5, n6)
+n4 = Node(4, n5)
+n3 = Node(3, n4)
+n2 = Node(2, n3)
+n1 = Node(1, n2)
+
+FindKthToTail(n1, 3)
