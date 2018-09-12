@@ -1,0 +1,72 @@
+class Node():
+    def __init__(self, value, next_node = None):
+        self.value = value
+        self.next_node = next_node
+
+def MergeOrderedLinkedList_Recursive(head1, head2):
+    if not head1:
+        return head2
+    if not head2:
+        return head1
+    else:
+        if head1.value < head2.value:
+            new_head = head1
+            new_head.next_node = MergeOrderedLinkedList_Recursive(head1.next_node, head2)
+        else:
+            new_head = head2
+            new_head.next_node = MergeOrderedLinkedList_Recursive(head1, head2.next_node)
+    return new_head
+
+def MergeOrderedLinkedList_Iteration(head1, head2):
+    if not head1:
+        return head2
+    if not head2:
+        return head1 
+
+    if head1.value < head2.value:
+        cur = head1
+        head1 = head1.next_node
+    else:
+        cur = head2
+        head2 = head2.next_node
+    new_head = cur
+
+    while head1 and head2:
+        if head1.value < head2.value:
+            cur.next_node = head1
+            head1 = head1.next_node
+        else:
+            cur.next_node = head2
+            head2 = head2.next_node
+        cur = cur.next_node
+    
+    while head1:
+        cur.next_node = head1
+        head1 = head1.next_node
+        cur = cur.next_node
+    
+    while head2:
+        cur.next_node = head2
+        head2 = head2.next_node
+        cur = cur.next_node
+    
+    return new_head
+
+n9 = Node(9)
+n7 = Node(7, n9)
+n5 = Node(5, n7)
+n3 = Node(3, n5)
+n1 = Node(1, n3)
+
+
+n10 = Node(10)
+n8 = Node(8, n10)
+n6 = Node(6, n8)
+n4 = Node(4, n6)
+n2 = Node(2, n4)
+
+
+head_Recursive = MergeOrderedLinkedList_Recursive(n1, n2) # MergeOrderedLinkedList_Iteration(n1, n2)
+while head_Recursive:
+    print(head_Recursive.value)
+    head_Recursive = head_Recursive.next_node
